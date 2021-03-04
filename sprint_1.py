@@ -82,15 +82,50 @@ def task_5():
 
 
 def task_6():
-    pass
+    with open('input.txt', 'r') as reader:
+        string = ''
+        for c in reader.read().lower():
+            if c.isalpha() or c.isdigit():
+                string += c
+        i = 0
+        flag = True
+        while i < len(string)/2:
+            if string[i] != string[len(string) - i-1]:
+                flag = False
+            i += 1
+        with open('output.txt', 'w') as writer:
+            writer.write(f'{flag}')
 
 
 def task_7():
-    pass
+    with open('input.txt', 'r') as reader:
+        answer = ''
+        dec_num = int(reader.read())
+        print(bin(dec_num))
+        while dec_num >= 1:
+            answer = str(dec_num % 2) + answer
+            dec_num //= 2
+        with open('output.txt', 'w') as writer:
+            writer.write(answer)
 
 
 def task_8():
-    pass
+    with open('input.txt', 'r') as reader:
+        num_1 = reader.readline()
+        num_2 = reader.readline()
+        if len(num_2) > len(num_1):
+            num_1, num_2 = num_2, num_1
+        i = len(num_2) - 1
+        answer = ''
+        flag = False
+        while i >= 0:
+            if num_1[i] == num_2[i]:
+                answer = '0' + answer
+                if num_1[i] == '1':
+                    flag = True
+            
+            i -= 1
+
 
 
 def task_9():
@@ -110,7 +145,7 @@ def task_12():
 
 
 time_start = time.time()
-task_5()
+task_7()
 time_finish = time.time()
 time_span = time_finish - time_start
 print(time_span, 'seconds')
