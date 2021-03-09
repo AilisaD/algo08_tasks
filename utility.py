@@ -36,3 +36,11 @@ def create_file_for_task_5():
         w.write(f'{n}\n')
         a = ''.join([random.choice(string.ascii_lowercase+' ') for _ in range(n)])
         w.write(a)
+
+
+def create_file_for_final_1():
+    with open('input1.txt', 'w') as w:
+        n = 1000000
+        w.write(f'{n}\n')
+        a = ' '.join([str(random.randint(0, 1000000000)) for _ in range(n)])
+        w.write(a)
