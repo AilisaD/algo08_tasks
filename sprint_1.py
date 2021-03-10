@@ -111,29 +111,52 @@ def task_7():
 
 def task_8():
     with open('input.txt', 'r') as reader:
-        num_1 = reader.readline()
-        num_2 = reader.readline()
+        num_1 = reader.readline().rstrip()
+        num_2 = reader.readline().rstrip()
+    if len(num_2) != len(num_1):
         if len(num_2) > len(num_1):
             num_1, num_2 = num_2, num_1
-        i = len(num_2) - 1
-        answer = ''
-        flag = False
-        while i >= 0:
-            if num_1[i] == num_2[i]:
+        num_2 = '0'*(len(num_1)-len(num_2)) + num_2
+    answer = ''
+    flag = False
+    for n1, n2 in zip(num_1[::-1], num_2[::-1]):
+        if n1 == n2:
+            if flag:
+                answer = '1' + answer
+            else:
                 answer = '0' + answer
-                if num_1[i] == '1':
-                    flag = True
-            
-            i -= 1
-
+            flag = False
+            if n1 == '1':
+                flag = True
+        else:
+            if flag:
+                answer = '0' + answer
+                flag = True
+            else:
+                answer = '1' + answer
+                flag = False
+    if flag:
+        answer = '1' + answer
+    with open('output.txt', 'w') as writer:
+        writer.write(answer)
 
 
 def task_9():
-    pass
+    with open('input.txt', 'r') as reader:
+        num = int(reader.read())
+    while num % 1 == 0:
+        num = num/4
+    answer = 'False'
+    if num == 0.25:
+        answer = 'True'
+    with open('output.txt', 'w') as writer:
+        writer.write(answer)
 
 
 def task_10():
-    pass
+    with open('input.txt', 'r') as reader:
+        num = int(reader.read())
+
 
 
 def task_11():
@@ -145,7 +168,7 @@ def task_12():
 
 
 time_start = time.time()
-task_7()
+task_9()
 time_finish = time.time()
 time_span = time_finish - time_start
 print(time_span, 'seconds')

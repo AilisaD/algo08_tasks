@@ -2,31 +2,41 @@ import utility
 import time
 
 
+def diff_before_i_zero(i, diff_to_zero, i_zero):
+    while i < i_zero:
+        diff_to_zero[i] = str(i_zero - i)
+        i += 1
+
+
 def task_1():
-    # разбить на функции
     with open('input.txt', 'r') as reader:
         len_street = int(reader.readline())
-        street = reader.readline().split()  # пойти по байтам
-    diff_to_zero = [0]*len_street
-    i_zero, pre_i_zero = None, None
-    for elem in enumerate(street):
-        if elem[1] == '0':
-            pre_i_zero = i_zero
-            i_zero = elem[0]
-            diff_to_zero[i_zero] = 0
-            j = None
-            if pre_i_zero is not None:
-                j = pre_i_zero + (i_zero - pre_i_zero) // 2 + 1
-            if pre_i_zero is None and elem[0] != 0:
-                j = 0
-            if j is not None:
-                while j < i_zero:
-                    diff_to_zero[j] = i_zero - j
-                    j += 1
-        if i_zero is not None and elem[1] != 0:
-            diff_to_zero[elem[0]] = elem[0] - i_zero
+        diff_to_zero = ['0'] * len_street
+        i_zero, pre_i_zero = None, None
+        num_house = ''
+        i = 0
+        for c in reader.read():
+            num_house += c
+            if c == ' ' or i + 1 == len_street:
+                num = int(num_house)
+                num_house = ''
+                if num == 0:
+                    pre_i_zero = i_zero
+                    i_zero = i
+                    diff_to_zero[i_zero] = str(0)
+                    if i != 0 and pre_i_zero is None:
+                        diff_before_i_zero(0, diff_to_zero, i_zero)
+                    if pre_i_zero is not None:
+                        diff_before_i_zero(
+                            pre_i_zero + (i_zero - pre_i_zero) // 2 + 1,
+                            diff_to_zero,
+                            i_zero
+                        )
+                if num != 0 and i_zero is not None:
+                    diff_to_zero[i] = str(i - i_zero)
+                i += 1
     with open('output.txt', 'w') as writer:
-        writer.write(" ".join([str(i) for i in diff_to_zero]))
+        writer.write(' '.join(diff_to_zero))
 
 
 def task_2():

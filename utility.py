@@ -33,8 +33,16 @@ def create_file_for_task_4():
 def create_file_for_task_5():
     with open('input1.txt', 'w') as w:
         n = 100000
+        a = ''.join([str(random.randint(0, 1)) for _ in range(n)])
+        b = ''.join([str(random.randint(0, 1)) for _ in range(n)])
+        w.write(f'{a}\n{b}')
+
+
+def create_file_for_task_8():
+    with open('input1.txt', 'w') as w:
+        n = 100000
         w.write(f'{n}\n')
-        a = ''.join([random.choice(string.ascii_lowercase+' ') for _ in range(n)])
+        a = ''.join([random.choice() for _ in range(n)])
         w.write(a)
 
 
