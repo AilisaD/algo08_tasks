@@ -65,20 +65,26 @@ def task_4():
             writer.write(f'{count}')
 
 
+def choose_long(word1, word2):
+    return word1 if len(word1) > len(word2) else word2
+
+
 def task_5():
     with open('input.txt', 'r') as reader:
-        n = int(reader.readline())
+        len_string = reader.readline()
         word, word_long = '', ''
-        if n > 0:
-            for c in reader.read():
-                if c == ' ':
-                    if len(word) > len(word_long):
-                        word_long = word
-                    word = ''
-                    continue
-                word += c
-        with open('output.txt', 'w') as writer:
-            writer.write(f'{word_long}\n{len(word_long)}')
+        for c in reader.read():
+            if c == ' ':
+                word_long = choose_long(word, word_long)
+                word = ''
+                continue
+            word += c
+    word_long = choose_long(word, word_long)
+    answer = f'{word_long}\n{len(word_long)}'
+    if len(word_long) < 1:
+        answer = '0'
+    with open('output.txt', 'w') as writer:
+        writer.write(answer)
 
 
 def task_6():
@@ -153,22 +159,53 @@ def task_9():
         writer.write(answer)
 
 
+def factorize(x):
+    for i in range(2, int(x ** 0.5)+1):
+        while x % i == 0:
+            x /= i
+            yield f'{i}'
+
+    if x != 1:
+        yield f'{int(x)}'
+
+
 def task_10():
     with open('input.txt', 'r') as reader:
         num = int(reader.read())
-
+    with open('output.txt', 'w') as writer:
+        writer.write(' '.join(factorize(num)))
 
 
 def task_11():
-    pass
+    with open('input.txt', 'r') as reader:
+        length_num_1 = int(reader.readline())
+        num_1 = int(reader.readline().replace(' ', ''))
+        num_2 = int(reader.readline())
+    with open('output.txt', 'w') as writer:
+        writer.write(' '.join(str(num_1 + num_2)))
 
 
 def task_12():
-    pass
+    with open('input.txt', 'r') as reader:
+        string_1 = ' '.join(reader.readline()).split()
+        string_2 = ' '.join(reader.readline()).split()
+    string_1.sort()
+    string_2.sort()
+    answer = ''
+
+    for i, c in enumerate(string_2):
+        answer = c
+        if c != string_1[i]:
+            break
+        if i + 1 == len(string_1):
+            answer = string_2[i+1]
+            break
+    with open('output.txt', 'w') as writer:
+        writer.write(answer)
 
 
 time_start = time.time()
-task_9()
+task_12()
 time_finish = time.time()
 time_span = time_finish - time_start
 print(time_span, 'seconds')

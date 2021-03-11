@@ -22,14 +22,6 @@ def create_file_for_task_4():
         w.write(f'{a}\n')
 
 
-def create_file_for_task_4():
-    with open('input1.txt', 'w') as w:
-        n = 100000
-        w.write(f'{n}\n')
-        a = ' '.join([str(random.randint(-273, 273)) for _ in range(n)])
-        w.write(f'{a}\n')
-
-
 def create_file_for_task_5():
     with open('input1.txt', 'w') as w:
         n = 100000
@@ -42,6 +34,13 @@ def create_file_for_task_8():
     with open('input1.txt', 'w') as w:
         n = 100000
         w.write(f'{n}\n')
+        a = ''.join([random.choice() for _ in range(n)])
+        w.write(a)
+
+
+def create_file_for_task_12():
+    with open('input1.txt', 'w') as w:
+        n = 10000
         a = ''.join([random.choice() for _ in range(n)])
         w.write(a)
 
