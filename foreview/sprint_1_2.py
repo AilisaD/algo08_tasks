@@ -1,10 +1,17 @@
-# 49275913
-with open('input.txt', 'r') as reader:
-    possible_num = int(reader.readline())*2
-    table = [0]*9
-    for c in reader.read():
-        if c.isdigit():
-            table[int(c)-1] += 1
-    a = sum([1 for i in table if 0 < i <= possible_num])
+# 49319462
+def main():
+    counter_number = [0] * 9
+
+    with open('input.txt', 'r') as reader:
+        possible_num_click = int(reader.readline()) * 2
+
+        for c in reader.read():
+            if c.isdigit():
+                counter_number[int(c) - 1] += 1
+
+    result = str(sum([1 for count in counter_number if 0 < count <= possible_num_click]))
     with open('output.txt', 'w') as writer:
-        writer.write(f'{a}')
+        writer.write(result)
+
+
+main()
