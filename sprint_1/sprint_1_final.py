@@ -9,7 +9,7 @@ def diff_before_i_zero(i, diff_to_zero, i_zero):
 
 
 def task_1():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         len_street = int(reader.readline())
         diff_to_zero = ['0'] * len_street
         i_zero, pre_i_zero = None, None
@@ -35,19 +35,19 @@ def task_1():
                 if num != 0 and i_zero is not None:
                     diff_to_zero[i] = str(i - i_zero)
                 i += 1
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(' '.join(diff_to_zero))
 
 
 def task_2():
     table = [0] * 9
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         possible_num = int(reader.readline())*2
         for c in reader.read():
             if c.isdigit():
                 table[int(c)-1] += 1
     a = str(sum([1 for i in table if 0 < i <= possible_num]))
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(a)
 
 

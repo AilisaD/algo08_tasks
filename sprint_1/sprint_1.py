@@ -3,24 +3,24 @@ import utility
 
 
 def task_1():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         a, x, b, c = map(int, reader.readline().split())
-        with open('output.txt', 'w') as writer:
+        with open('../output.txt', 'w') as writer:
             writer.write(f'{a * x * x + b * x + c}')
 
 
 def task_2():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         a, b, c = map(int, reader.readline().split())
         out_string = 'FAIL'
         if a & 1 == b & 1 == c & 1:
             out_string = 'WIN'
-        with open('output.txt', 'w') as writer:
+        with open('../output.txt', 'w') as writer:
             writer.write(out_string)
 
 
 def task_3():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         n = int(reader.readline())
         m = int(reader.readline())
         i = 0
@@ -40,12 +40,12 @@ def task_3():
         if y < m-1:
             res.append(mas[x][y+1])
         res.sort()
-        with open('output.txt', 'w') as writer:
+        with open('../output.txt', 'w') as writer:
             writer.write(f'{" ".join([str(i) for i in res])}')
 
 
 def task_4():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         n = int(reader.readline())
         count = 0
         if n != 1:
@@ -61,7 +61,7 @@ def task_4():
                 i += 1
         if n == 1:
             count = 1
-        with open('output.txt', 'w') as writer:
+        with open('../output.txt', 'w') as writer:
             writer.write(f'{count}')
 
 
@@ -70,7 +70,7 @@ def choose_long(word1, word2):
 
 
 def task_5():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         len_string = reader.readline()
         word, word_long = '', ''
         for c in reader.read():
@@ -83,12 +83,12 @@ def task_5():
     answer = f'{word_long}\n{len(word_long)}'
     if len(word_long) < 1:
         answer = '0'
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(answer)
 
 
 def task_6():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         string = ''
         for c in reader.read().lower():
             if c.isalpha() or c.isdigit():
@@ -99,24 +99,24 @@ def task_6():
             if string[i] != string[len(string) - i-1]:
                 flag = False
             i += 1
-        with open('output.txt', 'w') as writer:
+        with open('../output.txt', 'w') as writer:
             writer.write(f'{flag}')
 
 
 def task_7():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         answer = ''
         dec_num = int(reader.read())
         print(bin(dec_num))
         while dec_num >= 1:
             answer = str(dec_num % 2) + answer
             dec_num //= 2
-        with open('output.txt', 'w') as writer:
+        with open('../output.txt', 'w') as writer:
             writer.write(answer)
 
 
 def task_8():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         num_1 = reader.readline().rstrip()
         num_2 = reader.readline().rstrip()
     if len(num_2) != len(num_1):
@@ -143,19 +143,19 @@ def task_8():
                 flag = False
     if flag:
         answer = '1' + answer
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(answer)
 
 
 def task_9():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         num = int(reader.read())
     while num % 1 == 0:
         num = num/4
     answer = 'False'
     if num == 0.25:
         answer = 'True'
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(answer)
 
 
@@ -170,23 +170,23 @@ def factorize(x):
 
 
 def task_10():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         num = int(reader.read())
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(' '.join(factorize(num)))
 
 
 def task_11():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         length_num_1 = int(reader.readline())
         num_1 = int(reader.readline().replace(' ', ''))
         num_2 = int(reader.readline())
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(' '.join(str(num_1 + num_2)))
 
 
 def task_12():
-    with open('input.txt', 'r') as reader:
+    with open('../input.txt', 'r') as reader:
         string_1 = ' '.join(reader.readline()).split()
         string_2 = ' '.join(reader.readline()).split()
     string_1.sort()
@@ -200,7 +200,7 @@ def task_12():
         if i + 1 == len(string_1):
             answer = string_2[i+1]
             break
-    with open('output.txt', 'w') as writer:
+    with open('../output.txt', 'w') as writer:
         writer.write(answer)
 
 
