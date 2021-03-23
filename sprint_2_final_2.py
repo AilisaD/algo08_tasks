@@ -1,3 +1,11 @@
+# 49779537
+
+"""
+
+"""
+from math import floor
+
+
 class Stack:
     def __init__(self):
         self.items = []
@@ -18,27 +26,27 @@ class Stack:
 def solve(st, op):
     operand_2 = st.pop()
     operand_1 = st.pop()
-    return int(eval(f'{operand_1}{op}{operand_2}'))
+    return floor(float(eval(f'{operand_1}{op}{operand_2}')))
 
 
 if __name__ == '__main__':
     stack = Stack()
-    symbol = ''
+    operand = ''
     with open('input.txt', 'r') as reader:
         byte = reader.read(1)
         while byte:
             if byte == ' ':
-                if symbol.replace(' ', '') in '+*/-':
-                    symbol = solve(stack, symbol)
-                stack.push(symbol)
-                symbol = ''
-            symbol += byte
+                if operand.replace(' ', '') in '+*/-':
+                    operand = solve(stack, operand)
+                stack.push(operand)
+                operand = ''
+            operand += byte
             byte = reader.read(1)
-        symbol = symbol.replace('\n', '').replace(' ', '')
-        if symbol.replace('\n', '') in '+*/-':
-            stack.push(solve(stack, symbol))
+        operand = operand.replace('\n', '').replace(' ', '')
+        if operand.replace('\n', '') in '+*/-':
+            stack.push(solve(stack, operand))
         else:
-            stack.push(symbol)
+            stack.push(operand)
 
     with open('output.txt', 'w') as writer:
         writer.write(f'{stack.pop()}')
