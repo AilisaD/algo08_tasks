@@ -19,6 +19,5 @@ def is_correct_bracket_seq():
     seq = Stack()
 
 
-
 if __name__ == '__main__':
     pass
