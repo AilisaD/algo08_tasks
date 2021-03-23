@@ -59,7 +59,7 @@ class Deque:
 
 if __name__ == '__main__':
     result = ''
-    with open('../input.txt', 'r') as reader:
+    with open('input.txt', 'r') as reader:
         next(reader)
         dec = Deque(int(reader.readline()))
         for line in reader:
@@ -73,5 +73,5 @@ if __name__ == '__main__':
                 result += f'{dec.pop_back()}\n'
             if 'pop_front' in line:
                 result += f'{dec.pop_front()}\n'
-    with open('../output.txt', 'w') as writer:
+    with open('output.txt', 'w') as writer:
         writer.write(result)

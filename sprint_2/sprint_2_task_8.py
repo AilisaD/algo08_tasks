@@ -3,7 +3,7 @@ class Stack:
         self.items = []
 
     def push(self, value):
-            self.items.append(value)
+        self.items.append(value)
 
     def pop(self):
         if self.size == 0:
