@@ -1,5 +1,1 @@
-gena
-timofey
-alla
-gosha
-rita
+0 1 1 2 2 2
