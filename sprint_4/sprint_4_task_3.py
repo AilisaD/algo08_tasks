@@ -13,7 +13,7 @@ def hash_substring(m, table, left, right):
 
 
 def main():
-    with open('input.txt') as fr, open('output.txt', 'w') as fw:
+    with open('../input.txt') as fr, open('../output.txt', 'w') as fw:
         a = int(fr.readline())
         m = int(fr.readline())
         s = fr.readline().rstrip()
