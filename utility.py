@@ -34,14 +34,14 @@ def create_file_for_task_8():
     with open('input1.txt', 'w') as w:
         n = 100000
         w.write(f'{n}\n')
-        a = ''.join([random.choice() for _ in range(n)])
+        a = ''.join([random.choice(string.ascii_lowercase) for _ in range(n)])
         w.write(a)
 
 
 def create_file_for_task_12():
     with open('input1.txt', 'w') as w:
         n = 10000
-        a = ''.join([random.choice() for _ in range(n)])
+        a = ''.join([random.choice(string.ascii_lowercase) for _ in range(n)])
         w.write(a)
 
 
@@ -50,4 +50,12 @@ def create_file_for_final_1():
         n = 1000000
         w.write(f'{n}\n')
         a = ' '.join([str(random.randint(0, 1000000000)) for _ in range(n)])
+        w.write(a)
+
+
+def create_file_for_s4_t5():
+    with open('input1.txt', 'w') as w:
+        n = 6000
+        w.write(f'{n}\n')
+        a = ' '.join([''.join([str(random.choice(string.ascii_lowercase)) for _ in range(100)]) for _ in range(n)])
         w.write(a)

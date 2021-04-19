@@ -1,4 +1,4 @@
-# 50460279
+# 50444244
 
 """
 -- ПРИНЦИП РАБОТЫ --
@@ -27,26 +27,20 @@
 """
 
 
-def comparison(arr, i, left, pivot):
-    if arr[i][1] > arr[left][1]:
-        pivot += 1
-        arr[i], arr[pivot] = arr[pivot], arr[i]
-
-    if arr[i][1] == arr[left][1]:
-        if arr[i][2] < arr[left][2]:
-            arr[i], arr[left] = arr[left], arr[i]
-
-        elif arr[i][2] == arr[left][2] and arr[i][0] < arr[left][0]:
-            arr[left], arr[i] = arr[i], arr[left]
-
-    return pivot
-
-
 def partition(arr: list, left: int, right: int):
     pivot = left
 
     for i in range(left + 1, right + 1):
-        pivot = comparison(arr, i, left, pivot)
+        if arr[i][1] > arr[left][1]:
+            pivot += 1
+            arr[i], arr[pivot] = arr[pivot], arr[i]
+
+        if arr[i][1] == arr[left][1]:
+            if arr[i][2] < arr[left][2]:
+                arr[i], arr[left] = arr[left], arr[i]
+
+            elif arr[i][2] == arr[left][2] and arr[i][0] < arr[left][0]:
+                arr[left], arr[i] = arr[i], arr[left]
 
     arr[pivot], arr[left] = arr[left], arr[pivot]
     return pivot

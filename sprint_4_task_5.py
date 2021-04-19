@@ -33,29 +33,36 @@ def hash8(message):
     return h
 
 
+def count_anagram2(hash8_list):
+    tmp_ans = []
+    hash8_list = sorted(hash8_list, key=lambda x: x[1])
+    tmp_lst = [hash8_list[0]]
+    for i, h in enumerate(hash8_list[1:]):
+        if tmp_lst[len(tmp_lst)-1][1] != h[1] or i == len(hash8_list)-1:
+            tmp_ans.append(tmp_lst)
+            tmp_lst = [h]
+            continue
+        tmp_lst.append(h)
+    tmp_ans.append(tmp_lst)
+    tmp_ans = sorted(tmp_ans, key=lambda x: x[0][0])
+    ans = ''
+    for i in tmp_ans:
+        for j in i:
+            ans += f'{j[0]} '
+        ans += '\n'
+    return ans
+
+
 def main():
     hash8_list = []
     with open('input.txt', 'r') as fr:
         next(fr)
-        for i, word in enumerate(fr.readline().rstrip().split()):
+        for i, word in enumerate(fr.readline().split()):
             hash8_list.append([i, hash8(word)])
 
-    ans = []
-    i_del = []
-    i_ans = 0
-    i = 0
-    for h in hash8_list:
-        if len(ans)+len(i_del) == len(hash8_list):
-            break
-        ans.append(f'{h[0]} ')
-        for h2 in hash8_list[h[0]+1:]:
-            if h[1] == h2[1]:
-                ans[i_ans] += f'{h2[0]} '
-                i_del.append(h2[0])
-        i_ans += 1
-
+    ans = count_anagram2(hash8_list)
     with open('output.txt', 'w') as fw:
-        fw.write('\n'.join(ans))
+        fw.write(ans)
 
 
 if __name__ == '__main__':

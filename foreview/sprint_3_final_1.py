@@ -1,97 +1,94 @@
-# 50459252
+# 50443919
 
 """
 -- ПРИНЦИП РАБОТЫ --
 Для решения задачи поиска за время O(log(n)) подходит бинарный поиск.
-Т.е. каждый раз отрезок поиска должен уменьшаться вдвое.
+Но для этого нужен полностью отсортированный массив.
 
 По задаче, массив отсортирован, но со сдвигом.
 Т.е. состоит из 2-х отсортированных частей: [4, 5, 6, 1, 2].
 
-Функция search() реализует бинарный поиск на подобном массиве.
+При считывании массива из файла я нахожу индекс элемента,
+с которого начинается вторая отсортированная часть (idx_shift).
 
-Сразу проверяем средний и крайние элементы отрезка и,
-в случае нахождения искомого элемента, возвращаем индекс.
-
-Если отрезок отсортирован (левый элемент меньше правого),
-то рекурсивно вызываем search() по условиям обычного бинарного поиска.
-Далее рекурсия пойдет только по ветке отсортированного массива.
-
-Если массив "сломан", то условия рекурсивного вызова search()
-идут не по среднему элементу, а по крайним,
-которые в отсортированном массиве были бы в середине.
-
+Если таковой не нашлось, то ищу бинарным поиском по всему массиву.
+Если есть сдвиг, то смотрю,
+в какой из частей масива лежит искомый элемент
+и запускаю бинарный поиск по ней.
 
 -- ДОКАЗАТЕЛЬСВО КОРРЕКТНОСТИ --
-Если массив "сломан", то проверяем какой части
-должен принадлежать элемент:
- - если элемент больше первого элемента отрезка,
- то он ищется в левой части отрезка
- (к примеру, 100):
-        [19 21 100 101 | 1 4 5 7 12]
- кроме случая, когда он лежит дальше среднего элемента
- (к примеру, 106):
-        [19 21 100 101 103 | 105 106 107 1 4 5].
- - если элемент меньше первого элемента,
- то он должен лежать в правой части отрезка:
-        [19 21 100 101 | 1 4 5 7 12]
- кроме случая, когда он меньше среднего элемента
- (к примеру, 2):
-        [19 21 1 2 3 | 4 5 6 7 8 9].
-
+Когда мы знаем индекс сдвига, то можем говорить о двух отсортированных массивах
+в диапазонах: [0; idx_shift) и [idx_shift; n).
+Т.е. бинарный поиск будет корректно работать для каждого массива
+по отдельности.
 
 -- ВРЕМЕННАЯ СЛОЖНОСТЬ --
+Считывание массива и нахождение индекса сдвига происходит за O(n).
 Операция бинарного поиска выполняется за O(log(n)).
 
 
 -- ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ --
-Т.к. мы храним все элементы в массиве размером n,
+Т.к. мы храним все элементы в массиве размером n и храним индекс сдвига,
 то пространственная сложность будет O(n).
 """
 
 
-def search(array: list, x: int, left: int, right: int):
+def binary_search(arr: list, x: int, left: int, right: int):
     if right <= left:
         return -1
-
     mid = (left + right) // 2
-
-    if array[mid] == x:
+    if arr[mid] == x:
         return mid
-
-    if x == array[left]:
-        return left
-
-    if x == array[right - 1]:
-        return right - 1
-
-    if array[left] < array[right-1]:
-        if x < array[mid]:
-            return search(array, x, left, mid)
-        else:
-            return search(array, x, mid + 1, right)
-
-    if x > array[left]:
-        if x > array[mid] > array[left]:
-            return search(array, x, mid + 1, right)
-        else:
-            return search(array, x, left, mid)
-
+    elif x < arr[mid]:
+        return binary_search(arr, x, left, mid)
     else:
-        if x < array[mid] < array[right-1]:
-            return search(array, x, left, mid)
-        else:
-            return search(array, x, mid + 1, right)
+        return binary_search(arr, x, mid + 1, right)
 
 
-def main():
+def run_search(array: list, idx_shift: int, x: int):
+    if idx_shift == -1:
+        return binary_search(array, x, 0, len(array))
+    elif array[0] <= x <= array[idx_shift - 1]:
+        return binary_search(array, x, 0, idx_shift)
+
+    return binary_search(array, x, idx_shift, len(array))
+
+
+def read_from_file():
+    array = []
+    idx_shift = -1
+    num = ""
+
     with open('input.txt') as reader:
         next(reader)
         x = int(reader.readline())
-        array = [int(a) for a in reader.readline().split()]
-    idx = search(array, x, 0, len(array))
+        byte = reader.read(1)
+
+        while byte:
+            if byte != " ":
+                num += byte
+                byte = reader.read(1)
+                continue
+
+            array.append(int(num))
+            num = ""
+            if array[len(array) - 1] < array[len(array) - 2]:
+                idx_shift = len(array) - 1
+            byte = reader.read(1)
+
+        array.append(int(num))
+        if array[len(array) - 1] < array[len(array) - 2]:
+            idx_shift = len(array) - 1
+
+    return array, idx_shift, x
+
+
+def main():
+    array, idx_shift, x = read_from_file()
+    idx_x = run_search(array, idx_shift, x)
+
     with open('output.txt', 'w') as writer:
-        writer.write(str(idx))
+        writer.write(str(idx_x))
 
 
 if __name__ == "__main__":
