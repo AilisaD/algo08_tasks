@@ -55,13 +55,13 @@ def count_anagram2(hash8_list):
 
 def main():
     hash8_list = []
-    with open('input.txt', 'r') as fr:
+    with open('../input.txt', 'r') as fr:
         next(fr)
         for i, word in enumerate(fr.readline().split()):
             hash8_list.append([i, hash8(word)])
 
     ans = count_anagram2(hash8_list)
-    with open('output.txt', 'w') as fw:
+    with open('../output.txt', 'w') as fw:
         fw.write(ans)
 
 
