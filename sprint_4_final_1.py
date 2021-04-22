@@ -19,39 +19,34 @@ def counting_relevance(count_words_inputs, line):
     for word in line:
         if word in count_words_inputs:
             counting_relevance_in_file(count_words_inputs[word], list_inputs)
+    list_inputs = [[k, v] for k, v in list_inputs.items()]
 
-    for k, _ in sorted(list_inputs.items(),
-                       key=lambda item: item[1],
-                       reverse=True)[:5]:
-        yield f'{k}'
+    list_file = sorted(list_inputs, key=lambda x: (-x[1], x[0]), reverse=True)
+    print(list_file)
 
 
 def main():
     count_words_inputs = {}
     list_requests = []
 
-    with open('input.txt', 'r') as fr:
+    with open("input.txt", "r") as fr:
         n = int(fr.readline())
-
         for i in range(n):
             line = fr.readline().rstrip().split()
-            create_dict_words(count_words_inputs, i+1, line)
+            create_dict_words(count_words_inputs, i + 1, line)
 
         m = int(fr.readline())
-
         for i in range(m):
             list_requests.append(fr.readline().rstrip().split())
 
-    ans = ''
+    ans = ""
     for request in list_requests:
-        relevance = " ".join(counting_relevance(count_words_inputs, request))
+        relevance = ' '.join(counting_relevance(count_words_inputs, request))
+        ans += f"{relevance}\n"
 
-        if len(relevance) != 0:
-            ans += f'{relevance}\n'
-
-    with open('output.txt', 'w') as fw:
+    with open("output.txt", "w") as fw:
         fw.write(ans)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
