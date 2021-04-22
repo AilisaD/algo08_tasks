@@ -17,7 +17,7 @@ from sprint_4_final_1 import create_dict_words, counting_relevance
                 'everyone loves new year',
                 'mary likes black coffee without milk',
             ],
-            [[1, 2], [3], [2, 1]]
+            [['1', '2'], ['3'], ['2', '1']]
         ),
         (
             [
@@ -31,7 +31,7 @@ from sprint_4_final_1 import create_dict_words, counting_relevance
                 'everyone loves new year',
                 'mary likes black coffee without milk',
             ],
-            [[1, 2], [], [3], [2, 1]]
+            [['1', '2'], ['3'], ['2', '1']]
         ),
         (
             [
@@ -45,7 +45,7 @@ from sprint_4_final_1 import create_dict_words, counting_relevance
             [
                 'flat in moscow for crazy weekends'
             ],
-            [[4, 5, 1, 2, 3]]
+            [['4', '5', '1', '2', '3']]
         ),
         (
             [
@@ -62,7 +62,7 @@ from sprint_4_final_1 import create_dict_words, counting_relevance
                 'true',
                 'coffee in moscow'
             ],
-            [[2], [2], [5], [5], [1, 2, 3]]
+            [['2'], ['2'], ['5'], ['5'], ['1', '2', '3']]
         )
     ],
 )

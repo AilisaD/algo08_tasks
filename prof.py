@@ -1,3 +1,3 @@
 import cProfile
-
-cProfile.run('sprint_4_final_2.main()')
+import sprint_4_final_1
+cProfile.run('sprint_4_final_1.main()')
