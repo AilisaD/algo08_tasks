@@ -1,13 +1,8 @@
-5
-i love coffee in
-crazy moscow
+3
+i love coffee
 coffee with milk and sugar
 free tea for everyone
-false is true
-5
-rent flat in moscow
-sell flat in moscow
-true
-hh
-coffee in moscow
-coffee in flat with milk with
+3
+i like black coffee without milk
+everyone loves new year
+mary likes black coffee without milk
